@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Domain.DomainModels.Product>
+@{
+    ViewData["Title"] = "جميع المنتجات";
+}
+<div>
+    <h1 class="text-center">جميع المنتجات</h1>
+
+    <a class="btn btn-success btn-lg m-2" asp-controller="Products" asp-action="Add">إضافه منتج</a>
+
+    <table class="table table-bordered table-hover table-responsive">
+        <thead class="text-center">
+            <tr>
+                <th scope="col">إسم المنتج</th>
+                <th scope="col">السعر الشراء</th>
+                <th scope="col">الكميه المتاحه</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                @if (product.Quentity == 0)
+                {
+                    <tr class="bg-warning">
+                        <td>@product.Name</td>
+                        <td>@product.PurchasingPrice</td>                    
+                        <td>@product.Quentity</td>
+                        <td class="text-center">
+                            <button class="btn btn-danger" id="delete-@product.Id" onclick="deleteClient('@product.Id')">حذف</button>
+                            <a class="btn btn-success" href="/Products/Edit/@product.Id">تعديل</a>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>@product.Name</td>
+                        <td>@product.PurchasingPrice</td>
+                        <td>@product.Quentity</td>
+                        <td class="text-center">
+                            <button class="btn btn-danger" id="delete-@product.Id" onclick="deleteClient('@product.Id')">حذف</button>
+                            <a class="btn btn-success" asp-action="Edit" asp-route-id="@product.Id">تعديل</a>
+                        </td>
+                    </tr>
+                }
+            }
+
+
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function deleteClient(clientId) {
+        $.ajax({
+            url: '/Home/Delete/' + clientId,
+            type: 'PUT',
+            success: function (result) {
+                // On success, reload the page or remove the client row from the table
+                location.reload(); // Reload the page
+            },
+            error: function (xhr, status, error) {
+                console.error("Failed to delete client: ", error);
+                alert("An error occurred while trying to delete the client.");
+            }
+        });
+    }
+</script>
+

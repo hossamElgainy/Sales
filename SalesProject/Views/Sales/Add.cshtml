@@ -1,0 +1,35 @@
+﻿@model SalesProject.VM.AddPurchaseDto
+
+<h2 class="text-center">إضافه عمليه بيع</h2>
+<div class="w-75 m-auto">
+    <form asp-action="Add" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+
+            <label asp-for="ProductId" class="control-label"></label>
+            @Html.DropDownListFor(m => m.ProductId, (SelectList)ViewBag.Products, new { @class = "form-control" })            <span asp-validation-for="ProductId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Quentity" class="control-label"></label>
+            <input asp-for="Quentity" class="form-control" type="number" />
+            <span asp-validation-for="Quentity" class="text-danger"></span>
+        </div>
+        <div class="form-group m-1">
+            <input type="submit" value="حفظ" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+<div class="ml-2">
+    <a asp-action="Index" asp-controller="Sales">الرجوع إلي المبيعات</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

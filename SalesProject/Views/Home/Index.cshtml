@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model SalesProject.VM.StatisticsDto
+
+<!--services-->
+<div class="services pb-5">
+    <div class="container">
+        <h1 class="text-center">الصفحه الرئيسيه</h1>
+        <div class="pt-5">
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="text-center bg-dark text-white p-4" style="border-radius:10px">
+                        <h1>عدد المنتجات</h1>
+                        <h2>@Model.Products</h2>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="text-center bg-dark text-white p-4" style="border-radius:10px">
+                        <h1>الأرباح</h1>
+                        <h2>@Model.Revenue</h2>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end services-->
+
